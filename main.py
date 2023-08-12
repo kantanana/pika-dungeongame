@@ -2,15 +2,16 @@ import pygame, sys
 from pygame.locals import QUIT
 from startup import startup
 try:
-    from objects import *
+    from objects import Player, screen
 except:
     AssertionError()
 
-startup()
+clock = pygame.time.Clock()
 running = True
-pygame.display.set_caption('Hello World!')
+pygame.display.set_caption('Pika game')
+a = Player()
+
 while running:
-    a = Player()
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -27,5 +28,5 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 a.move_stop()
-    a.update()
+    clock.tick(200)
     pygame.display.update()
