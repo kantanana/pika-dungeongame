@@ -10,7 +10,7 @@ class Object:
         self.presence = True
         self.pos = (0, 0)
         self.velo = (0, 0)
-        self.pace = 10
+        self.pace = 1
         self.sprite = None
 
     def update(self):
