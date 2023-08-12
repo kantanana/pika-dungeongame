@@ -12,9 +12,10 @@ class Object:
         self.velo = (0, 0)
         self.pace = 1
         self.sprite = None
+        self.black = None
 
     def update(self):
-        screen.fill((0,0,0))
+        screen.blit(self.black, self.pos)
         self.pos = (self.pos[0] + self.velo[0],
                     self.pos[1] + self.velo[1])
         screen.blit(self.sprite, self.pos)
@@ -43,6 +44,32 @@ class Player(Object):
     def __init__(self):
         super().__init__()
         self.sprite = pygame.image.load('pika.jpg')
+        self.black = pygame.image.load('black_50by50.jpg')
         self.test = 10
+        self.hp = 100
+        self.attack = 5
+
+    def attack(self, target):
+        target.hp -= self.attack
+
+class Enemy(Object):
+    def __init__(self):
+        super().__init__()
+        self.sprite = pygame.image.load('pika.jpg')
+        self.black = pygame.image.load('black_50by50.jpg')
+        self.test = 10
+        self.hp = 100
+        self.attack = 5
+
+    def chase(self, player):
+        if self.pos[0] > player.pos[0]:
+            self.move_left()
+        elif self.pos[0] < player.pos[0]:
+            self.move_right()
+        elif self.pos[1] > player.pos[1]:
+            self.move_up()
+        elif self.pos[1] < player.pos[1]:
+            self.move_down()
+    
         
     

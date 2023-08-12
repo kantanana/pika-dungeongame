@@ -1,15 +1,14 @@
 import pygame, sys
 from pygame.locals import QUIT
 from startup import startup
-try:
-    from objects import Player, screen
-except:
-    AssertionError()
+from objects import Player, Enemy, screen
+from collision import collide
 
 clock = pygame.time.Clock()
 running = True
 pygame.display.set_caption('Pika game')
 a = Player()
+b = Enemy()
 
 while running:
     for event in pygame.event.get():
@@ -32,5 +31,9 @@ while running:
         a.move_down()
     else:
         a.move_stop()
+    if keys[pygame.MOUSEBUTTONDOWN]:
+        if collide(a.pos, b.pos):
+            a.attack()
+    b.chase(a)
     clock.tick(200)
     pygame.display.update()
